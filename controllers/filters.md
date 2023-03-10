@@ -12,7 +12,6 @@ uid: mvc/controllers/filters
 
 :::moniker range=">= aspnetcore-6.0"
 
-By [Kirk Larkin](https://github.com/serpent5), [Rick Anderson](https://twitter.com/RickAndMSFT), [Tom Dykstra](https://github.com/tdykstra/), and [Steve Smith](https://ardalis.com/)
 
 *Filters* in ASP.NET Core allow code to run before or after specific stages in the request processing pipeline.
 
@@ -23,7 +22,7 @@ Built-in filters handle tasks such as:
 
 Custom filters can be created to handle cross-cutting concerns. Examples of cross-cutting concerns include error handling, caching, configuration, authorization, and logging. Filters avoid duplicating code. For example, an error handling exception filter could consolidate error handling.
 
-This document applies to Razor Pages, API controllers, and controllers with views. Filters don't work directly with [Razor components](xref:blazor/components/index). A filter can only indirectly affect a component when:
+This document applies to Razor Pages, API controllers, and controllers with views. Filters don't work directly with Razor components <a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/components/?view=aspnetcore-7.0" target="_blank">https://learn.microsoft.com/en-us/aspnet/core/blazor/components/?view=aspnetcore-7.0</a>. A filter can only indirectly affect a component when:
 
 * The component is embedded in a page or view.
 * The page or controller and view uses the filter.
@@ -1154,7 +1153,5 @@ When passing an *instance* of a filter into `Add`, instead of its `Type`, the fi
 
 ## Next actions
 
-* See [Filter methods for Razor Pages](xref:razor-pages/filter).
-* To experiment with filters, [download, test, and modify the GitHub sample](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/mvc/controllers/filters/samples).
 
 :::moniker-end

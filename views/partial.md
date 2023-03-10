@@ -9,8 +9,6 @@ uid: mvc/views/partial
 ---
 # Partial views in ASP.NET Core
 
-By [Steve Smith](https://ardalis.com/), [Maher JENDOUBI](https://twitter.com/maherjend), [Rick Anderson](https://twitter.com/RickAndMSFT), and [Scott Sauber](https://twitter.com/scottsauber)
-
 A partial view is a [Razor](xref:mvc/views/razor) markup file (`.cshtml`) without an [`@page`](xref:mvc/views/razor#page) directive that renders HTML output *within* another markup file's rendered output.
 
 :::moniker range=">= aspnetcore-2.1"
@@ -19,7 +17,6 @@ The term *partial view* is used when developing either an MVC app, where markup 
 
 :::moniker-end
 
-[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/mvc/views/partial/sample) ([how to download](xref:index#how-to-download-a-sample))
 
 ## When to use partial views
 
@@ -32,7 +29,7 @@ Partial views are an effective way to:
 
   When the same markup elements are used across markup files, a partial view removes the duplication of markup content into one partial view file. When the markup is changed in the partial view, it updates the rendered output of the markup files that use the partial view.
 
-Partial views shouldn't be used to maintain common layout elements. Common layout elements should be specified in [_Layout.cshtml](xref:mvc/views/layout) files.
+Partial views shouldn't be used to maintain common layout elements. Common layout elements should be specified in [_Layout.cshtml](layout.md) files.
 
 Don't use a partial view where complex rendering logic or code execution is required to render the markup. Instead of a partial view, use a [view component](xref:mvc/views/view-components).
 
@@ -40,7 +37,7 @@ Don't use a partial view where complex rendering logic or code execution is requ
 
 :::moniker range=">= aspnetcore-2.0"
 
-A partial view is a `.cshtml` markup file without an [`@page`](xref:mvc/views/razor#page) directive maintained within the *Views* folder (MVC) or *Pages* folder (Razor Pages).
+A partial view is a `.cshtml` markup file without an [`@page`](razor.md#page) directive maintained within the *Views* folder (MVC) or *Pages* folder (Razor Pages).
 
 In ASP.NET Core MVC, a controller's <xref:Microsoft.AspNetCore.Mvc.ViewResult> is capable of returning either a view or a partial view. In Razor Pages, a <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel> can return a partial view represented as a <xref:Microsoft.AspNetCore.Mvc.PartialViewResult> object. Referencing and rendering partial views is described in the [Reference a partial view](#reference-a-partial-view) section.
 
@@ -79,16 +76,6 @@ public IActionResult OnGetPartial() =>
     };
 ```
 
-:::moniker-end
-
-:::moniker range=">= aspnetcore-2.2"
-
-In ASP.NET Core 2.2 or later, a handler method can alternatively call the <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageBase.Partial%2A> method to produce a `PartialViewResult` object:
-
-[!code-csharp[](partial/sample/PartialViewsSample/Pages/DiscoveryRP.cshtml.cs?name=snippet_OnGetPartial)]
-
-:::moniker-end
-
 ### Use a partial view in a markup file
 
 :::moniker range=">= aspnetcore-2.1"
@@ -114,8 +101,6 @@ We recommend that apps use the [Asynchronous HTML Helper](#asynchronous-html-hel
 :::moniker range=">= aspnetcore-2.1"
 
 ### Partial Tag Helper
-
-The [Partial Tag Helper](xref:mvc/views/tag-helpers/builtin-th/partial-tag-helper) requires ASP.NET Core 2.1 or later.
 
 The Partial Tag Helper renders content asynchronously and uses an HTML-like syntax:
 
@@ -195,9 +180,7 @@ The following example references a partial view with a relative path:
 @await Html.PartialAsync("../Account/_LoginPartial.cshtml")
 ```
 
-Alternatively, you can render a partial view with <xref:Microsoft.AspNetCore.Mvc.Rendering.HtmlHelperPartialExtensions.RenderPartialAsync%2A>. This method doesn't return an <xref:Microsoft.AspNetCore.Html.IHtmlContent>. It streams the rendered output directly to the response. Because the method doesn't return a result, it must be called within a Razor code block:
-
-[!code-cshtml[](partial/sample/PartialViewsSample/Views/Home/Discovery.cshtml?name=snippet_RenderPartialAsync)]
+Alternatively, you can render a partial view with <xref:Microsoft.AspNetCore.Mvc.Rendering.HtmlHelperPartialExtensions.RenderPartialAsync%2A>. This method doesn't return an <xref:Microsoft.AspNetCore.Html.IHtmlContent>. It streams the rendered output directly to the response. Because the method doesn't return a result, it must be called within a Razor code block.
 
 Since `RenderPartialAsync` streams rendered content, it provides better performance in some scenarios. In performance-critical situations, benchmark the page using both approaches and use the approach that generates a faster response.
 
@@ -206,15 +189,13 @@ Since `RenderPartialAsync` streams rendered content, it provides better performa
 <xref:Microsoft.AspNetCore.Mvc.Rendering.HtmlHelperPartialExtensions.Partial%2A> and <xref:Microsoft.AspNetCore.Mvc.Rendering.HtmlHelperPartialExtensions.RenderPartial%2A> are the synchronous equivalents of `PartialAsync` and `RenderPartialAsync`, respectively. The synchronous equivalents aren't recommended because there are scenarios in which they deadlock. The synchronous methods are targeted for removal in a future release.
 
 > [!IMPORTANT]
-> If you need to execute code, use a [view component](xref:mvc/views/view-components) instead of a partial view.
+> If you need to execute code, use a [view component](view-components.md) instead of a partial view.
 
 :::moniker range=">= aspnetcore-2.1"
 
 Calling `Partial` or `RenderPartial` results in a Visual Studio analyzer warning. For example, the presence of `Partial` yields the following warning message:
 
 > Use of IHtmlHelper.Partial may result in application deadlocks. Consider using &lt;partial&gt; Tag Helper or IHtmlHelper.PartialAsync.
-
-Replace calls to `@Html.Partial` with `@await Html.PartialAsync` or the [Partial Tag Helper](xref:mvc/views/tag-helpers/builtin-th/partial-tag-helper). For more information on Partial Tag Helper migration, see [Migrate from an HTML Helper](xref:mvc/views/tag-helpers/builtin-th/partial-tag-helper#migrate-from-an-html-helper).
 
 :::moniker-end
 
@@ -279,74 +260,3 @@ You can pass a model into a partial view. The model can be a custom object. You 
 ```
 
 :::moniker range=">= aspnetcore-2.1"
-
-**Razor Pages**
-
-The following markup in the sample app is from the `Pages/ArticlesRP/ReadRP.cshtml` page. The page contains two partial views. The second partial view passes in a model and `ViewData` to the partial view. The `ViewDataDictionary` constructor overload is used to pass a new `ViewData` dictionary while retaining the existing `ViewData` dictionary.
-
-[!code-cshtml[](partial/sample/PartialViewsSample/Pages/ArticlesRP/ReadRP.cshtml?name=snippet_ReadPartialViewRP&highlight=5,15-20)]
-
-`Pages/Shared/_AuthorPartialRP.cshtml` is the first partial view referenced by the `ReadRP.cshtml` markup file:
-
-[!code-cshtml[](partial/sample/PartialViewsSample/Pages/Shared/_AuthorPartialRP.cshtml)]
-
-`Pages/ArticlesRP/_ArticleSectionRP.cshtml` is the second partial view referenced by the `ReadRP.cshtml` markup file:
-
-[!code-cshtml[](partial/sample/PartialViewsSample/Pages/ArticlesRP/_ArticleSectionRP.cshtml)]
-
-**MVC**
-
-:::moniker-end
-
-The following markup in the sample app shows the `Views/Articles/Read.cshtml` view. The view contains two partial views. The second partial view passes in a model and `ViewData` to the partial view. The `ViewDataDictionary` constructor overload is used to pass a new `ViewData` dictionary while retaining the existing `ViewData` dictionary.
-
-[!code-cshtml[](partial/sample/PartialViewsSample/Views/Articles/Read.cshtml?name=snippet_ReadPartialView&highlight=5,15-20)]
-
-`Views/Shared/_AuthorPartial.cshtml` is the first partial view referenced by the `Read.cshtml` markup file:
-
-[!code-cshtml[](partial/sample/PartialViewsSample/Views/Shared/_AuthorPartial.cshtml)]
-
-`Views/Articles/_ArticleSection.cshtml` is the second partial view referenced by the `Read.cshtml` markup file:
-
-[!code-cshtml[](partial/sample/PartialViewsSample/Views/Articles/_ArticleSection.cshtml)]
-
-At runtime, the partials are rendered into the parent markup file's rendered output, which itself is rendered within the shared `_Layout.cshtml`. The first partial view renders the article author's name and publication date:
-
-> Abraham Lincoln
->
-> This partial view from &lt;shared partial view file path&gt;.
-> 11/19/1863 12:00:00 AM
-
-The second partial view renders the article's sections:
-
-> Section One Index: 0
->
-> Four score and seven years ago ...
->
-> Section Two Index: 1
->
-> Now we are engaged in a great civil war, testing ...
->
-> Section Three Index: 2
->
-> But, in a larger sense, we can not dedicate ...
-
-## Additional resources
-
-:::moniker range=">= aspnetcore-2.1"
-
-* <xref:mvc/views/razor>
-* <xref:mvc/views/tag-helpers/intro>
-* <xref:mvc/views/tag-helpers/builtin-th/partial-tag-helper>
-* <xref:mvc/views/view-components>
-* <xref:mvc/controllers/areas>
-
-:::moniker-end
-
-:::moniker range="< aspnetcore-2.1"
-
-* <xref:mvc/views/razor>
-* <xref:mvc/views/view-components>
-* <xref:mvc/controllers/areas>
-
-:::moniker-end

@@ -9,7 +9,6 @@ uid: mvc/views/working-with-forms
 ---
 # Tag Helpers in forms in ASP.NET Core
 
-By [Rick Anderson](https://twitter.com/RickAndMSFT), [N. Taylor Mullen](https://github.com/NTaylorMullen), [Dave Paquette](https://twitter.com/Dave_Paquette), and [Jerrie Pelser](https://github.com/jerriep)
 
 This document demonstrates working with Forms and the HTML elements commonly used on a Form. The HTML [Form](https://www.w3.org/TR/html401/interact/forms.html) element provides the primary mechanism web apps use to post back data to the server. Most of this document describes [Tag Helpers](tag-helpers/intro.md) and how they can help you productively create robust HTML forms. We recommend you read [Introduction to Tag Helpers](tag-helpers/intro.md) before you read this document.
 
@@ -46,7 +45,7 @@ The MVC runtime generates the `action` attribute value from the Form Tag Helper 
 
 ### Using a named route
 
-The `asp-route` Tag Helper attribute can also generate markup for the HTML `action` attribute. An app with a [route](../../fundamentals/routing.md)  named `register` could use the following markup for the registration page:
+The `asp-route` Tag Helper attribute can also generate markup for the HTML `action` attribute. An app with a [route](../fundamentals/routing.md)  named `register` could use the following markup for the registration page:
 
 [!code-cshtml[](../../mvc/views/working-with-forms/sample/final/Views/Demo/RegisterRoute.cshtml)]
 
@@ -63,13 +62,13 @@ Many of the views in the *Views/Account* folder (generated when you create a new
 
 ## The Form Action Tag Helper
 
-The Form Action Tag Helper generates the `formaction` attribute on the generated `<button ...>` or `<input type="image" ...>` tag. The `formaction` attribute controls where a form submits its data. It binds to [\<input>](https://www.w3.org/wiki/HTML/Elements/input) elements of type `image` and [\<button>](https://www.w3.org/wiki/HTML/Elements/button) elements. The Form Action Tag Helper enables the usage of several [AnchorTagHelper](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) `asp-` attributes to control what `formaction` link is generated for the corresponding element.
+The Form Action Tag Helper generates the `formaction` attribute on the generated `<button ...>` or `<input type="image" ...>` tag. The `formaction` attribute controls where a form submits its data. It binds to [\<input>](https://www.w3.org/wiki/HTML/Elements/input) elements of type `image` and [\<button>](https://www.w3.org/wiki/HTML/Elements/button) elements. The Form Action Tag Helper enables the usage of several [AnchorTagHelper](tag-helpers/built-in/anchor-tag-helper.md) `asp-` attributes to control what `formaction` link is generated for the corresponding element.
 
-Supported [AnchorTagHelper](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) attributes to control the value of `formaction`:
+Supported [AnchorTagHelper](tag-helpers/built-in/anchor-tag-helper.md) attributes to control the value of `formaction`:
 
 |Attribute|Description|
 |---|---|
-|[asp-controller](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-controller)|The name of the controller.|
+|[asp-controller](tag-helpers/built-in/anchor-tag-helper/asp-controller)|The name of the controller.|
 |[asp-action](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-action)|The name of the action method.|
 |[asp-area](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-area)|The name of the area.|
 |[asp-page](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-page)|The name of the Razor page.|
@@ -211,11 +210,6 @@ The following table shows some common [data annotations](xref:Microsoft.AspNetCo
 |[DataType(DataType.Date)]|type="date"|
 |[DataType(DataType.Time)]|type="time"|
 
-Sample:
-
-[!code-csharp[](working-with-forms/sample/final/ViewModels/RegisterViewModel.cs)]
-
-[!code-cshtml[](working-with-forms/sample/final/Views/Demo/RegisterInput.cshtml)]
 
 The code above generates the following HTML:
 
@@ -322,25 +316,11 @@ When ASP.NET Core MVC calculates the value of `ModelExpression`, it inspects sev
 
 You can also navigate to child properties using the property path of the view model. Consider a more complex model class that contains a child `Address` property.
 
-[!code-csharp[](../../mvc/views/working-with-forms/sample/final/ViewModels/AddressViewModel.cs?highlight=1,2,3,4&range=5-8)]
 
-[!code-csharp[](../../mvc/views/working-with-forms/sample/final/ViewModels/RegisterAddressViewModel.cs?highlight=8&range=5-13)]
-
-In the view, we bind to `Address.AddressLine1`:
-
-[!code-cshtml[](../../mvc/views/working-with-forms/sample/final/Views/Demo/RegisterAddress.cshtml?highlight=6)]
-
-The following HTML is generated for `Address.AddressLine1`:
 
 ```html
 <input type="text" id="Address_AddressLine1" name="Address.AddressLine1" value="">
 ```
-
-### Expression names and Collections
-
-Sample, a model containing an array of `Colors`:
-
-[!code-csharp[](../../mvc/views/working-with-forms/sample/final/ViewModels/Person.cs?highlight=3&range=5-10)]
 
 The action method:
 
@@ -352,64 +332,6 @@ public IActionResult Edit(int id, int colorIndex)
 }
 ```
 
-The following Razor shows how you access a specific `Color` element:
-
-[!code-cshtml[](working-with-forms/sample/final/Views/Demo/EditColor.cshtml)]
-
-The `Views/Shared/EditorTemplates/String.cshtml` template:
-
-[!code-cshtml[](working-with-forms/sample/final/Views/Shared/EditorTemplates/String.cshtml)]
-
-Sample using `List<T>`:
-
-[!code-csharp[](working-with-forms/sample/final/ViewModels/ToDoItem.cs?range=3-8)]
-
-The following Razor shows how to iterate over a collection:
-
-[!code-cshtml[](working-with-forms/sample/final/Views/Demo/Edit.cshtml)]
-
-The `Views/Shared/EditorTemplates/ToDoItem.cshtml` template:
-
-[!code-cshtml[](working-with-forms/sample/final/Views/Shared/EditorTemplates/ToDoItem.cshtml)]
-
-`foreach` should be used if possible when the value is going to be used in an `asp-for` or `Html.DisplayFor` equivalent context. In general, `for` is better than `foreach` (if the scenario allows it) because it doesn't need to allocate an enumerator; however, evaluating an indexer in a LINQ expression can be expensive and should be minimized.
-
-&nbsp;
-
->[!NOTE]
->The commented sample code above shows how you would replace the lambda expression with the `@` operator to access each `ToDoItem` in the list.
-
-## The Textarea Tag Helper
-
-The `Textarea Tag Helper` tag helper is  similar to the Input Tag Helper.
-
-* Generates the `id` and `name` attributes, and the data validation attributes from the model for a [\<textarea>](https://www.w3.org/wiki/HTML/Elements/textarea) element.
-
-* Provides strong typing.
-
-* HTML Helper alternative: `Html.TextAreaFor`
-
-Sample:
-
-[!code-csharp[](working-with-forms/sample/final/ViewModels/DescriptionViewModel.cs)]
-
-[!code-cshtml[](../../mvc/views/working-with-forms/sample/final/Views/Demo/RegisterTextArea.cshtml?highlight=4)]
-
-The following HTML is generated:
-
-```html
-<form method="post" action="/Demo/RegisterTextArea">
-  <textarea data-val="true"
-   data-val-maxlength="The field Description must be a string or array type with a maximum length of &#x27;1024&#x27;."
-   data-val-maxlength-max="1024"
-   data-val-minlength="The field Description must be a string or array type with a minimum length of &#x27;5&#x27;."
-   data-val-minlength-min="5"
-   id="Description" name="Description">
-  </textarea>
-  <button type="submit">Test</button>
-  <input name="__RequestVerificationToken" type="hidden" value="<removed for brevity>">
-</form>
-```
 
 ## The Label Tag Helper
 
@@ -668,21 +590,7 @@ Generates the following HTML:
 
 If you find yourself using the "not specified" option in multiple pages, you can create a template to eliminate repeating the HTML:
 
-[!code-cshtml[](../../mvc/views/working-with-forms/sample/final/Views/Home/IndexEmptyTemplate.cshtml?highlight=5)]
 
-The `Views/Shared/EditorTemplates/CountryViewModel.cshtml` template:
-
-[!code-cshtml[](working-with-forms/sample/final/Views/Shared/EditorTemplates/CountryViewModel.cshtml)]
-
-Adding HTML [\<option>](https://www.w3.org/wiki/HTML/Elements/option) elements isn't limited to the *No selection* case. For example, the following view and action method will generate HTML similar to the code above:
-
-[!code-csharp[](working-with-forms/sample/final/Controllers/HomeController.cs?name=snippetNone)]
-
-[!code-cshtml[](working-with-forms/sample/final/Views/Home/IndexOption.cshtml)]
-
-The correct `<option>` element will be selected ( contain the `selected="selected"` attribute) depending on the current `Country` value.
-
-[!code-csharp[](working-with-forms/sample/final/Controllers/HomeController.cs?range=114-119)]
 
 ```html
  <form method="post" action="/Home/IndexEmpty">
@@ -697,12 +605,3 @@ The correct `<option>` element will be selected ( contain the `selected="selecte
  </form>
  ```
 
-## Additional resources
-
-* <xref:mvc/views/tag-helpers/intro>
-* [HTML Form element](https://www.w3.org/TR/html401/interact/forms.html)
-* [Request Verification Token](/aspnet/mvc/overview/security/xsrfcsrf-prevention-in-aspnet-mvc-and-web-pages)
-* <xref:mvc/models/model-binding>
-* <xref:mvc/models/validation>
-* [IAttributeAdapter Interface](xref:Microsoft.AspNetCore.Mvc.DataAnnotations.IAttributeAdapter)
-* [Code snippets for this document](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/mvc/views/working-with-forms/sample/final)

@@ -8,7 +8,7 @@ uid: mvc/controllers/routing
 ---
 # Routing to controller actions in ASP.NET Core
 
-By [Ryan Nowak](https://github.com/rynowak), [Kirk Larkin](https://twitter.com/serpent5), and [Rick Anderson](https://twitter.com/RickAndMSFT)
+
 
 :::moniker range=">= aspnetcore-6.0"
 

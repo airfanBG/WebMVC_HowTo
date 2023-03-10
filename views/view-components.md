@@ -10,9 +10,6 @@ uid: mvc/views/view-components
 ---
 # View components in ASP.NET Core
 
-By [Rick Anderson](https://twitter.com/RickAndMSFT)
-
-:::moniker range=">= aspnetcore-6.0"
 
 ## View components
 
@@ -60,7 +57,7 @@ Like controllers, view components must be public, non-nested, and non-abstract c
 
 A view component class:
 
-* Supports constructor [dependency injection](../../fundamentals/dependency-injection.md)
+* Supports constructor [dependency injection](../fundamentals/dependency-injection.md)
 * Doesn't take part in the controller lifecycle, therefore [filters](../controllers/filters.md) can't be used in a view component
 
 To prevent a class that has a case-insensitive `ViewComponent` suffix from being treated as a view component, decorate the class with the [`[NonViewComponent]`](xref:Microsoft.AspNetCore.Mvc.NonViewComponentAttribute) attribute:

@@ -10,13 +10,11 @@ uid: mvc/models/file-uploads
 ---
 # Upload files in ASP.NET Core
 
-By [Rutger Storm](https://github.com/rutix)
 
 :::moniker range=">= aspnetcore-5.0"
 
 ASP.NET Core supports uploading one or more files using buffered model binding for smaller files and unbuffered streaming for larger files.
 
-[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/mvc/models/file-uploads/samples/) ([how to download](xref:index#how-to-download-a-sample))
 
 ## Security considerations
 
@@ -2219,13 +2217,4 @@ The examples in this topic rely upon <xref:System.IO.MemoryStream> to hold the u
 
 ## Additional resources
 
-:::moniker range="< aspnetcore-5.0"
-* [HTTP connection request draining](xref:fundamentals/servers/kestrel#http11-request-draining)
-:::moniker-end
-:::moniker range=">= aspnetcore-5.0"
-* [HTTP connection request draining](xref:fundamentals/servers/kestrel/request-draining)
-:::moniker-end
 
-* [Unrestricted File Upload](https://owasp.org/www-community/vulnerabilities/Unrestricted_File_Upload)
-* [Azure Security: Security Frame: Input Validation | Mitigations](/azure/security/azure-security-threat-modeling-tool-input-validation)
-* [Azure Cloud Design Patterns: Valet Key pattern](/azure/architecture/patterns/valet-key)

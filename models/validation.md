@@ -14,8 +14,6 @@ uid: mvc/models/validation
 
 This article explains how to validate user input in an ASP.NET Core MVC or Razor Pages app.
 
-[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/mvc/models/validation/samples) ([how to download](xref:index#how-to-download-a-sample)).
-
 ## Model state
 
 Model state represents errors that come from two subsystems: model binding and model validation. Errors that originate from [model binding](xref:mvc/models/model-binding) are generally data conversion errors. For example, an "x" is entered in an integer field. Model validation occurs after model binding and reports errors where data doesn't conform to business rules. For example, a 0 is entered in a field that expects a rating between 1 and 5.
@@ -417,8 +415,5 @@ The preceding approach won't prevent client-side validation of ASP.NET Core Iden
 ## Additional resources
 
 * <xref:System.ComponentModel.DataAnnotations?displayProperty=fullName>
-* [Model Binding](xref:mvc/models/model-binding)
+* [Model Binding](model-binding.md)
 
-:::moniker-end
-
-[!INCLUDE[](~/mvc/models/validation/includes/validation6.md)]

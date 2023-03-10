@@ -8,11 +8,10 @@ uid: mvc/views/razor
 ---
 # Razor syntax reference for ASP.NET Core
 
-By [Rick Anderson](https://twitter.com/RickAndMSFT), [Taylor Mullen](https://twitter.com/ntaylormullen), and [Dan Vicarel](https://github.com/Rabadash8820)
 
 Razor is a markup syntax for embedding .NET based code into webpages. The Razor syntax consists of Razor markup, C#, and HTML. Files containing Razor generally have a `.cshtml` file extension. Razor is also found in [Razor component](xref:blazor/components/index) files (`.razor`). Razor syntax is similar to the templating engines of various JavaScript single-page application (SPA) frameworks, such as Angular, React, VueJs, and Svelte. For more information see, <xref:client-side/spa-services>.
 
-[Introduction to ASP.NET Web Programming Using the Razor Syntax](/aspnet/web-pages/overview/getting-started/introducing-razor-syntax-c) provides many samples of programming with Razor syntax. Although the topic was written for ASP.NET rather than ASP.NET Core, most of the samples apply to ASP.NET Core.
+[Introduction to ASP.NET Web Programming Using the Razor Syntax](https://learn.microsoft.com/en-us/aspnet/web-pages/overview/getting-started/introducing-razor-syntax-c) provides many samples of programming with Razor syntax. Although the topic was written for ASP.NET rather than ASP.NET Core, most of the samples apply to ASP.NET Core.
 
 ## Rendering HTML
 
@@ -22,7 +21,7 @@ The default Razor language is HTML. Rendering HTML from Razor markup is no diffe
 
 Razor supports C# and uses the `@` symbol to transition from HTML to C#. Razor evaluates C# expressions and renders them in the HTML output.
 
-When an `@` symbol is followed by a [Razor reserved keyword](#razor-reserved-keywords), it transitions into Razor-specific markup. Otherwise, it transitions into plain HTML.
+When an `@` symbol is followed by a [Razor reserved keyword](https://learn.microsoft.com/en-us/aspnet/core/mvc/views/razor?view=aspnetcore-7.0), it transitions into Razor-specific markup. Otherwise, it transitions into plain HTML.
 
 To escape an `@` symbol in Razor markup, use a second `@` symbol:
 
@@ -104,8 +103,6 @@ Explicit Razor expressions consist of an `@` symbol with balanced parenthesis. T
 Any content within the `@()` parenthesis is evaluated and rendered to the output.
 
 Implicit expressions, described in the previous section, generally can't contain spaces. In the following code, one week isn't subtracted from the current time:
-
-[!code-cshtml[](razor/sample/Views/Home/Contact.cshtml?range=17)]
 
 The code renders the following HTML:
 
@@ -189,7 +186,7 @@ The code renders the following HTML:
 <p>Hate cannot drive out hate, only love can do that. - Martin Luther King, Jr.</p>
 ```
 
-In code blocks, declare [local functions](/dotnet/csharp/programming-guide/classes-and-structs/local-functions) with markup to serve as templating methods:
+In code blocks, declare local function with markup to serve as templating methods:
 
 ```cshtml
 @{
@@ -471,7 +468,6 @@ Razor directives are represented by implicit expressions with reserved keywords 
 
 Understanding how Razor generates code for a view makes it easier to understand how directives work.
 
-[!code-cshtml[](razor/sample/Views/Home/Contact8.cshtml)]
 
 The code generates a class similar to the following:
 
@@ -532,9 +528,7 @@ The `@functions` directive enables adding C# members (fields, properties, and me
 
 In [Razor components](xref:blazor/components/index), use `@code` over `@functions` to add C# members.
 
-For example:
 
-[!code-cshtml[](razor/sample/Views/Home/Contact6.cshtml)]
 
 The code generates the following HTML markup:
 
@@ -542,9 +536,6 @@ The code generates the following HTML markup:
 <div>From method: Hello</div>
 ```
 
-The following code is the generated Razor C# class:
-
-[!code-csharp[](razor/sample/Classes/Views_Home_Test_cshtml.cs?range=1-19)]
 
 `@functions` methods serve as templating methods when they have markup:
 
@@ -596,14 +587,6 @@ The `@inherits` directive provides full control of the class the view inherits:
 ```cshtml
 @inherits TypeNameOfClassToInheritFrom
 ```
-
-The following code is a custom Razor page type:
-
-[!code-csharp[](razor/sample/Classes/CustomRazorPage.cs)]
-
-The `CustomText` is displayed in a view:
-
-[!code-cshtml[](razor/sample/Views/Home/Contact10.cshtml)]
 
 The code renders the following HTML:
 
@@ -1076,6 +1059,3 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 ```
 
-## Additional resources
-
-[Introduction to ASP.NET Web Programming Using the Razor Syntax](/aspnet/web-pages/overview/getting-started/introducing-razor-syntax-c) provides many samples of programming with Razor syntax.
