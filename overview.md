@@ -1,13 +1,3 @@
----
-title: Overview of ASP.NET Core MVC
-author: ardalis
-description: Learn how ASP.NET Core MVC is a rich framework for building web apps and APIs using the Model-View-Controller design pattern.
-ms.author: riande
-ms.date: 02/12/2020
-uid: mvc/overview
----
-# Overview of ASP.NET Core MVC
-
 
 
 ASP.NET Core MVC is a rich framework for building web apps and APIs using the Model-View-Controller design pattern.
