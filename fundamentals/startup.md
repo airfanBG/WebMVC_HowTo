@@ -10,8 +10,6 @@ uid: fundamentals/startup
 ---
 # App startup in ASP.NET Core
 
-By [Rick Anderson](https://twitter.com/RickAndMSFT)
-
 :::moniker range=">= aspnetcore-7.0"
 
 ASP.NET Core apps created with the web templates contain the application startup code in the `Program.cs` file.

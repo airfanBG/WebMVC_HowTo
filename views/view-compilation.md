@@ -1,13 +1,4 @@
----
-title: Razor file compilation in ASP.NET Core
-author: rick-anderson
-description: Learn how compilation of Razor files occurs in an ASP.NET Core app.
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 01/25/2022
-uid: mvc/views/view-compilation
----
+
 # Razor file compilation in ASP.NET Core
 
 :::moniker range=">= aspnetcore-6.0"
@@ -60,11 +51,11 @@ To enable runtime compilation only for the Development environment:
 
       :::code language="json" source="view-compilation/samples/6.x/ViewCompilationSample/Snippets/launchSettings.json" highlight="17-18,25-26":::
 
-With this approach, no code changes are needed in `Program.cs`. At runtime, ASP.NET Core searches for an [assembly-level HostingStartup attribute](xref:fundamentals/configuration/platform-specific-configuration#hostingstartup-attribute) in `Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation`. The `HostingStartup` attribute specifies the app startup code to execute and that startup code enables runtime compilation.
+With this approach, no code changes are needed in `Program.cs`. At runtime, ASP.NET Core searches for an assembly-level HostingStartup attribute in `Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation`. The `HostingStartup` attribute specifies the app startup code to execute and that startup code enables runtime compilation.
 
 ## Enable runtime compilation for a Razor Class Library
 
-Consider a scenario in which a Razor Pages project references a [Razor Class Library (RCL)](xref:razor-pages/ui-class) named *MyClassLib*. The RCL contains a `_Layout.cshtml` file consumed by MVC and Razor Pages projects. To enable runtime compilation for the `_Layout.cshtml` file in that RCL, make the following changes in the Razor Pages project:
+- Only if your .net core is under v.5
 
 1. Enable runtime compilation with the instructions at [Enable runtime compilation conditionally](#enable-runtime-compilation-conditionally).
 1. Configure <xref:Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation.MvcRazorRuntimeCompilationOptions> in `Program.cs`:
@@ -94,7 +85,7 @@ Build-time and publish-time compilation of Razor files is enabled by default by 
 
 The Razor Pages and MVC project templates include an option to enable runtime compilation when the project is created. This option is supported in ASP.NET Core 3.1 and later.
 
-# [Visual Studio](#tab/visual-studio)
+
 
 In the **Create a new ASP.NET Core web application** dialog:
 
@@ -159,11 +150,4 @@ Consider a scenario in which a Razor Pages project references a [Razor Class Lib
 
     In the preceding code, an absolute path to the *MyClassLib* RCL is constructed. The [PhysicalFileProvider API](xref:fundamentals/file-providers#physicalfileprovider) is used to locate directories and files at that absolute path. Finally, the `PhysicalFileProvider` instance is added to a file providers collection, which allows access to the RCL's `.cshtml` files.
 
-## Additional resources
 
-* [RazorCompileOnBuild and RazorCompileOnPublish](xref:razor-pages/sdk#properties) properties
-* <xref:razor-pages/index>
-* <xref:mvc/views/overview>
-* <xref:razor-pages/sdk>
-
-:::moniker-end

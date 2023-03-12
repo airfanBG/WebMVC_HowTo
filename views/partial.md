@@ -1,12 +1,4 @@
----
-title: Partial views in ASP.NET Core
-author: ardalis
-description: Discover how to use partial views to break up large markup files and reduce the duplication of common markup across web pages in ASP.NET Core apps.
-ms.author: riande
-ms.custom: mvc
-ms.date: 06/12/2019
-uid: mvc/views/partial
----
+
 # Partial views in ASP.NET Core
 
 A partial view is a [Razor](xref:mvc/views/razor) markup file (`.cshtml`) without an [`@page`](xref:mvc/views/razor#page) directive that renders HTML output *within* another markup file's rendered output.
@@ -31,7 +23,7 @@ Partial views are an effective way to:
 
 Partial views shouldn't be used to maintain common layout elements. Common layout elements should be specified in [_Layout.cshtml](layout.md) files.
 
-Don't use a partial view where complex rendering logic or code execution is required to render the markup. Instead of a partial view, use a [view component](xref:mvc/views/view-components).
+Don't use a partial view where complex rendering logic or code execution is required to render the markup. Instead of a partial view, use a [view component](view-components.md).
 
 ## Declare partial views
 
@@ -53,7 +45,7 @@ A partial view is a `.cshtml` markup file maintained within the *Views* folder.
 
 A controller's <xref:Microsoft.AspNetCore.Mvc.ViewResult> is capable of returning either a view or a partial view. Referencing and rendering partial views is described in the [Reference a partial view](#reference-a-partial-view) section.
 
-Unlike MVC view rendering, a partial view doesn't run `_ViewStart.cshtml`. For more information on `_ViewStart.cshtml`, see <xref:mvc/views/layout>.
+Unlike MVC view rendering, a partial view doesn't run `_ViewStart.cshtml`. For more information on `_ViewStart.cshtml`.
 
 Partial view file names often begin with an underscore (`_`). This naming convention isn't required, but it helps to visually differentiate partial views from views.
 
@@ -241,7 +233,7 @@ The following conventions apply to partial view discovery:
 * Partial views can be *chained*&mdash;a partial view can call another partial view if a circular reference isn't formed by the calls. Relative paths are always relative to the current file, not to the root or parent of the file.
 
 > [!NOTE]
-> A [Razor](xref:mvc/views/razor) `section` defined in a partial view is invisible to parent markup files. The `section` is only visible to the partial view in which it's defined.
+> A [Razor](razor.md) `section` defined in a partial view is invisible to parent markup files. The `section` is only visible to the partial view in which it's defined.
 
 ## Access data from partial views
 

@@ -12,7 +12,6 @@ uid: fundamentals/environments
 
 :::moniker range=">= aspnetcore-6.0"
 
-By [Rick Anderson](https://twitter.com/RickAndMSFT) and [Kirk Larkin](https://twitter.com/serpent5)
 
 ASP.NET Core configures app behavior based on the runtime environment using an environment variable.
 

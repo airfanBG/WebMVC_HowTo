@@ -11,7 +11,7 @@ ms.custom: contperf-fy21q3, engagement-fy23
 
 # Part 2, add a controller to an ASP.NET Core MVC app
 
-By [Rick Anderson](https://twitter.com/RickAndMSFT)
+
 
 :::moniker range=">= aspnetcore-7.0"
 
@@ -43,37 +43,23 @@ These concepts are introduced and demonstrated in this tutorial series while bui
 
 In **Solution Explorer**, right-click **Controllers > Add > Controller**.
 
-![Solution Explorer, right click Controllers > Add > Controller](~/tutorials/first-mvc-app/adding-controller/_static/add_controllercopyVS19v16.9.png)
 
 In the **Add New Scaffolded Item** dialog box, select **MVC Controller - Empty** > **Add**.
 
-![Add MVC controller](~/tutorials/first-mvc-app/adding-controller/_static/acCopyVS19v16.9.png)
 
 In the **Add New Item - MvcMovie** dialog, enter *`HelloWorldController.cs`* and select **Add**.
 
-# [Visual Studio Code](#tab/visual-studio-code)
-
 Select the **EXPLORER** icon and then control-click (right-click) **Controllers > New File** and name the new file `HelloWorldController.cs`.
-
-![Contextual menu](~/tutorials/first-mvc-app-xplat/adding-controller/_static/new_fileVSC1.51.png)
-
-# [Visual Studio for Mac](#tab/visual-studio-mac)
 
 In **Solution Explorer**, control-click **Controllers** and select **Add > New File**.
 
-![Contextual menu for adding a controller](~/tutorials/first-mvc-app-mac/adding-controller/_static/add_controller_MacVS22.png)
 
 Select **ASP.NET Core** and **Controller Class**.
 
 Name the controller **HelloWorldController**.
 
-![Add MVC controller and name it](~/tutorials/first-mvc-app-mac/adding-controller/_static/ac_MacVS22.png)
-
 ---
 
-Replace the contents of `Controllers/HelloWorldController.cs` with the following code:
-
-  [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie70/Controllers/HelloWorldController.cs?name=First)]
 
 Every `public` method in a controller is callable as an HTTP endpoint. In the sample above, both methods return a string. Note the comments preceding each method.
 
@@ -91,17 +77,13 @@ The second comment specifies an [HTTP GET](https://developer.mozilla.org/docs/We
 
 Run the app without the debugger.
 
-Append `/HelloWorld` to the path in the address bar. The `Index` method returns a string.
 
-![Browser window showing an app response of This is my default action](~/tutorials/first-mvc-app/adding-controller/_static/hell1.png)
-
-MVC invokes controller classes, and the action methods within them, depending on the incoming URL. The default [URL routing logic](xref:mvc/controllers/routing) used by MVC, uses a format like this to determine what code to invoke:
+MVC invokes controller classes, and the action methods within them, depending on the incoming URL. The default [URL routing logic](../controllers/routing.md) used by MVC, uses a format like this to determine what code to invoke:
 
 `/[Controller]/[ActionName]/[Parameters]`
 
 The routing format is set in the `Program.cs` file.
 
-[!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie60/Program.cs?name=MapControllerRoute&highlight=3)]
 
 When you browse to the app and don't supply any URL segments, it defaults to the "Home" controller and the "Index" method specified in the template line highlighted above.  In the preceding URL segments:
 
@@ -113,59 +95,4 @@ Browse to: `https://localhost:{PORT}/HelloWorld/Welcome`. Replace `{PORT}` with 
 
 The `Welcome` method runs and returns the string `This is the Welcome action method...`. For this URL, the controller is `HelloWorld` and `Welcome` is the action method. You haven't used the `[Parameters]` part of the URL yet.
 
-![Browser window showing an application response of This is the Welcome action method](~/tutorials/first-mvc-app/adding-controller/_static/welcome.png)
 
-Modify the code to pass some parameter information from the URL to the controller. For example, `/HelloWorld/Welcome?name=Rick&numtimes=4`.
-
-Change the `Welcome` method to include two parameters as shown in the following code.
-
-[!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie70/Controllers/HelloWorldController.cs?name=Second)]
-
-The preceding code:
-
-* Uses the C# optional-parameter feature to indicate that the `numTimes` parameter defaults to 1 if no value is passed for that parameter.
-* Uses `HtmlEncoder.Default.Encode` to protect the app from malicious input, such as through JavaScript.
-* Uses [Interpolated Strings](/dotnet/articles/csharp/language-reference/keywords/interpolated-strings) in `$"Hello {name}, NumTimes is: {numTimes}"`.
-
-Run the app and browse to: `https://localhost:{PORT}/HelloWorld/Welcome?name=Rick&numtimes=4`. Replace `{PORT}` with your port number.
-
-Try different values for `name` and `numtimes` in the URL. The MVC [model binding](xref:mvc/models/model-binding) system automatically maps the named parameters from the query string to parameters in the method. See [Model Binding](xref:mvc/models/model-binding) for more information.
-
-![Browser window showing an application response of Hello Rick, NumTimes is\: 4](~/tutorials/first-mvc-app/adding-controller/_static/rick4.png)
-
-In the previous image:
-
-* The URL segment `Parameters` isn't used.
-* The `name` and `numTimes` parameters are passed in the [query string](https://wikipedia.org/wiki/Query_string).
-* The `?` (question mark) in the above URL is a separator, and the query string follows.
-* The `&` character separates field-value pairs.
-
-Replace the `Welcome` method with the following code:
-
-  [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie70/Controllers/HelloWorldController.cs?name=Third)]
-
-Run the app and enter the following URL: `https://localhost:{PORT}/HelloWorld/Welcome/3?name=Rick`
-
-In the preceding URL:
-
-* The third URL segment matched the route parameter `id`.
-* The `Welcome` method contains a parameter `id` that matched the URL template in the `MapControllerRoute` method.
-* The trailing `?` starts the [query string](https://wikipedia.org/wiki/Query_string).
-
-[!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie60/Program.cs?name=MapControllerRoute&highlight=3)]
-
-In the preceding example:
-
-* The third URL segment matched the route parameter `id`.
-* The `Welcome` method contains a parameter `id` that matched the URL template in the `MapControllerRoute` method.
-* The trailing `?` (in `id?`) indicates the `id` parameter is optional.
-
-> [!div class="step-by-step"]
-> [Previous: Get Started](~/tutorials/first-mvc-app/start-mvc.md)
-> [Next: Add a View](~/tutorials/first-mvc-app/adding-view.md)
-
-:::moniker-end
-
-[!INCLUDE[](~/tutorials/first-mvc-app/adding-controller/includes/adding-controller6.md)]
-
-[!INCLUDE[](~/tutorials/first-mvc-app/adding-controller/includes/adding-controller3-5.md)]

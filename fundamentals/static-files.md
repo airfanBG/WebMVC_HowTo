@@ -12,7 +12,6 @@ uid: fundamentals/static-files
 
 :::moniker range=">= aspnetcore-6.0"
 
-By [Rick Anderson](https://twitter.com/RickAndMSFT) and [Kirk Larkin](https://twitter.com/serpent5)
 
 Static files, such as HTML, CSS, images, and JavaScript, are assets an ASP.NET Core app serves directly to clients by default.
 

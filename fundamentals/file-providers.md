@@ -10,7 +10,6 @@ uid: fundamentals/file-providers
 ---
 # File Providers in ASP.NET Core
 
-By [Steve Smith](https://ardalis.com/)
 
 :::moniker range=">= aspnetcore-3.0"
 

@@ -51,7 +51,7 @@ ASP.NET Core MVC provides a patterns-based way to build dynamic websites that en
 
 ## Routing
 
-ASP.NET Core MVC is built on top of [ASP.NET Core's routing](../fundamentals/routing.md), a powerful URL-mapping component that lets you build applications that have comprehensible and searchable URLs. This enables you to define your application's URL naming patterns that work well for search engine optimization (SEO) and for link generation, without regard for how the files on your web server are organized. You can define your routes using a convenient route template syntax that supports route value constraints, defaults and optional values.
+ASP.NET Core MVC is built on top of [ASP.NET Core's routing](fundamentals/routing.md), a powerful URL-mapping component that lets you build applications that have comprehensible and searchable URLs. This enables you to define your application's URL naming patterns that work well for search engine optimization (SEO) and for link generation, without regard for how the files on your web server are organized. You can define your routes using a convenient route template syntax that supports route value constraints, defaults and optional values.
 
 *Convention-based routing* enables you to globally define the URL formats that your application accepts and how each of those formats maps to a specific action method on a given controller. When an incoming request is received, the routing engine parses the URL and matches it to one of the defined URL formats, and then calls the associated controller's action method.
 
@@ -120,7 +120,7 @@ The framework handles validating request data both on the client and on the serv
 
 ## Dependency injection
 
-ASP.NET Core has built-in support for [dependency injection (DI)](../fundamentals/dependency-injection.md). In ASP.NET Core MVC, [controllers](controllers/dependency-injection.md) can request needed services through their constructors, allowing them to follow the [Explicit Dependencies Principle](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#explicit-dependencies).
+ASP.NET Core has built-in support for [dependency injection (DI)](fundamentals/dependency-injection.md). In ASP.NET Core MVC, [controllers](controllers/dependency-injection.md) can request needed services through their constructors, allowing them to follow the [Explicit Dependencies Principle](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#explicit-dependencies).
 
 Your app can also use [dependency injection in view files](views/dependency-injection.md), using the `@inject` directive:
 
@@ -155,13 +155,13 @@ public class AccountController : Controller
 
 In addition to being a great platform for building web sites, ASP.NET Core MVC has great support for building Web APIs. You can build services that reach a broad range of clients including browsers and mobile devices.
 
-The framework includes support for HTTP content-negotiation with built-in support to [format data](xref:web-api/advanced/formatting) as JSON or XML. Write [custom formatters](xref:web-api/advanced/custom-formatters) to add support for your own formats.
+The framework includes support for HTTP content-negotiation with built-in support to [format data](https://andrewlock.net/formatting-response-data-as-xml-or-json-based-on-the-url-in-asp-net-core/) as JSON or XML. Write [custom formatters](https://learn.microsoft.com/en-us/aspnet/core/web-api/advanced/custom-formatters?view=aspnetcore-7.0) to add support for your own formats.
 
 Use link generation to enable support for hypermedia. Easily enable support for [cross-origin resource sharing (CORS)](https://www.w3.org/TR/cors/) so that your Web APIs can be shared across multiple Web applications.
 
 ## Testability
 
-The framework's use of interfaces and dependency injection make it well-suited to unit testing, and the framework includes features (like a TestHost and InMemory provider for Entity Framework) that make [integration tests](xref:test/integration-tests) quick and easy as well. Learn more about [how to test controller logic](controllers/testing.md).
+The framework's use of interfaces and dependency injection make it well-suited to unit testing, and the framework includes features (like a TestHost and InMemory provider for Entity Framework) that make [integration tests](https://learn.microsoft.com/en-us/aspnet/core/test/integration-tests?view=aspnetcore-7.0) quick and easy as well. Learn more about [how to test controller logic](controllers/testing.md).
 
 ## Razor view engine
 
@@ -232,8 +232,4 @@ The <xref:Microsoft.Extensions.DependencyInjection.MvcCoreMvcBuilderExtensions.S
 
 For more information, see <xref:mvc/compatibility-version>.
 
-## Additional resources
 
-* [MyTested.AspNetCore.Mvc - Fluent Testing Library for ASP.NET Core MVC](https://github.com/ivaylokenov/MyTested.AspNetCore.Mvc): Strongly-typed unit testing library, providing a fluent interface for testing MVC and web API apps. (*Not maintained or supported by Microsoft.*)
-* <xref:blazor/components/prerendering-and-integration>
-* <xref:fundamentals/dependency-injection>
